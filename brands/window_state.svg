@@ -5,7 +5,7 @@
       <stop offset="1" stop-color="#1c6fb3"/>
     </linearGradient>
   </defs>
-  <rect x="8" y="8" width="240" height="240" rx="52" fill="url(#bg)"/>
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="url(#bg)"/>
   <g transform="translate(53,53) scale(6.25)" fill="#ffffff">
     <!-- open: border-left-variant -->
     <path d="M15,5H17V3H15M19,21H21V19H19M19,13H21V11H19M19,5H21V3H19M19,17H21V15H19M15,21H17V19H15M19,9H21V7H19M3,21H5V3H3M7,5H9V3H7M7,21H9V19H7M11,5H13V3H11M11,21H13V19H11V21Z"/>
