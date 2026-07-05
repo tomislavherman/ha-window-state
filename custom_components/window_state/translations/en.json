@@ -1,4 +1,16 @@
 {
+  "entity": {
+    "sensor": {
+      "window_state": {
+        "state": {
+          "closed": "Closed",
+          "tilted": "Tilted",
+          "open": "Open",
+          "unknown": "Unknown"
+        }
+      }
+    }
+  },
   "config": {
     "step": {
       "user": {

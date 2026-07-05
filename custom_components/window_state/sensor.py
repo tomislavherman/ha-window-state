@@ -53,6 +53,7 @@ class WindowStateSensor(SensorEntity, RestoreEntity):
     _attr_should_poll = False
     _attr_device_class = SensorDeviceClass.ENUM
     _attr_options = WINDOW_STATES
+    _attr_translation_key = "window_state"
 
     def __init__(self, entry: ConfigEntry, config: dict[str, str]) -> None:
         """Initialize the sensor."""
