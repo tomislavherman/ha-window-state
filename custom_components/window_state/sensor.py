@@ -28,9 +28,10 @@ STATE_WINDOW_UNKNOWN = "unknown"
 WINDOW_STATES = [STATE_CLOSED, STATE_TILTED, STATE_OPEN, STATE_WINDOW_UNKNOWN]
 
 _ICONS = {
-    STATE_CLOSED: "mdi:window-closed-variant",
-    STATE_TILTED: "mdi:window-open",
-    STATE_OPEN: "mdi:window-open-variant",
+    STATE_CLOSED: "mdi:border-all-variant",
+    STATE_TILTED: "mdi:border-bottom-variant",
+    STATE_OPEN: "mdi:border-left-variant",
+    STATE_WINDOW_UNKNOWN: "mdi:border-top-variant",
 }
 
 
@@ -132,4 +133,4 @@ class WindowStateSensor(SensorEntity, RestoreEntity):
     @property
     def icon(self) -> str:
         """Return an icon that reflects the current window state."""
-        return _ICONS.get(self._attr_native_value, "mdi:window-closed")
+        return _ICONS.get(self._attr_native_value, "mdi:border-top-variant")
