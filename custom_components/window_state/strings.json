@@ -1,0 +1,36 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a window",
+        "description": "Create a window from its two contact sensors.",
+        "data": {
+          "name": "Name",
+          "top_sensor": "Top contact sensor",
+          "bottom_sensor": "Bottom contact sensor"
+        },
+        "data_description": {
+          "name": "Friendly name for this window (used for the device and entity).",
+          "top_sensor": "Binary sensor reporting the upper (tilt) contact.",
+          "bottom_sensor": "Binary sensor reporting the lower (open) contact."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Edit window sensors",
+        "description": "Change the contact sensors used to derive the window state.",
+        "data": {
+          "top_sensor": "Top contact sensor",
+          "bottom_sensor": "Bottom contact sensor"
+        },
+        "data_description": {
+          "top_sensor": "Binary sensor reporting the upper (tilt) contact.",
+          "bottom_sensor": "Binary sensor reporting the lower (open) contact."
+        }
+      }
+    }
+  }
+}
