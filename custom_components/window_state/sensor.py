@@ -135,3 +135,11 @@ class WindowStateSensor(SensorEntity, RestoreEntity):
     def icon(self) -> str:
         """Return an icon that reflects the current window state."""
         return _ICONS.get(self._attr_native_value, "mdi:border-top-variant")
+
+    @property
+    def extra_state_attributes(self) -> dict[str, str]:
+        """Expose the source sensors so they are visible from the entity."""
+        return {
+            CONF_TOP_SENSOR: self._top_entity_id,
+            CONF_BOTTOM_SENSOR: self._bottom_entity_id,
+        }

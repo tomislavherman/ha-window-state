@@ -23,11 +23,78 @@ The sensor is a `device_class: enum` sensor with the options
 `closed`, `tilted`, `open`, `unknown`. It updates reactively (local push) the
 moment either source sensor changes — no polling.
 
+## Sensor placement
+
+This integration needs **two** contact sensors on the window. Both go on the
+**moving edge of the window — the vertical side with the handle, opposite the
+hinges.** Put one near the **top** and one near the **bottom** of that edge.
+
+Do **not** mount the sensors on the hinge side: that edge barely moves when the
+window opens, so the sensors there wouldn't detect anything. Position each
+sensor so its two halves line up when the window is fully closed.
+
+```
+   hinges                    handle side (moving edge)
+     │                                 │
+     ▼                                 ▼
+   ┌─────────────────────────────────[ TOP sensor ]┐
+   │                                               │
+   │                  window                       │
+   │                                               │
+   └──────────────────────────────[ BOTTOM sensor ]┘
+```
+
+Why top + bottom on the moving edge tells the three states apart:
+
+| Window position                | Top sensor | Bottom sensor | Reported |
+| ------------------------------ | ---------- | ------------- | -------- |
+| Closed                         | closed     | closed        | `closed` |
+| Tilted (handle up)             | open       | closed        | `tilted` |
+| Open / turned (handle sideways)| open       | open          | `open`   |
+
+When the window is **tilted**, it pivots along the bottom, so the top of the
+moving edge swings in (top sensor opens) while the bottom stays put. When it's
+**fully opened**, the whole moving edge swings in and both sensors open.
+
+Tips:
+
+- If a window reads `tilted` when it's actually closed (or vice-versa), your
+  **top and bottom sensors are swapped** — fix it in the integration's
+  **Configure** options, no remounting needed.
+- A persistent `unknown` state (bottom open while top is closed) can't happen on
+  a real tilt-and-turn window, so it usually means a **mis-mounted, misaligned,
+  or failing bottom sensor**.
+
 ## Installation
+
+### Don't have HACS yet?
+
+HACS (Home Assistant Community Store) is not part of Home Assistant by default —
+you have to add it once. If you don't see **HACS** in your sidebar, install it
+first, then follow the custom-repository steps below. If you'd rather not use
+HACS at all, skip to [Manual](#manual).
+
+1. Open a terminal on your Home Assistant host (e.g. the **Terminal & SSH** or
+   **Advanced SSH & Web Terminal** add-on from **Settings → Add-ons → Add-on
+   Store**) and run:
+
+   ```
+   wget -O - https://get.hacs.xyz | bash -
+   ```
+
+2. **Restart Home Assistant** (**Settings → System →** power icon **→ Restart
+   Home Assistant**).
+3. Go to **Settings → Devices & Services → Add Integration**, search **HACS**,
+   accept the prompts, and complete the **GitHub device login** it shows
+   (open the link, enter the code, authorize). HACS then appears in your
+   sidebar.
+
+For the full, up-to-date procedure see the
+[official HACS install docs](https://hacs.xyz/docs/use/download/download/).
 
 ### HACS (custom repository)
 
-1. In Home Assistant, open **HACS → Integrations**.
+1. In Home Assistant, open **HACS** (from the sidebar).
 2. Click the **⋮** menu (top right) → **Custom repositories**.
 3. Add `https://github.com/tomislavherman/ha-window-state` with category
    **Integration**.
@@ -53,5 +120,17 @@ This integration is configured entirely through the UI — there is no YAML.
 Repeat **Add Integration** for each window you want to track — multiple
 instances are supported.
 
-To change the source sensors later, open the integration entry and choose
-**Configure** to reselect the top and bottom sensors.
+## Options
+
+Open the window's entry in **Settings → Devices & Services → Window State** and
+choose **Configure** to:
+
+- **Reselect the top and bottom sensors** after setup.
+- **Hide source sensors** — hides the two contact sensors from the Home
+  Assistant UI so only the derived window entity is shown. This works like the
+  core Group helper's "Hide members": it hides them **everywhere**, not just
+  under this window, and is reversed if you turn the option off or delete the
+  window. Sensors you hid yourself are left untouched.
+
+The window entity also lists its `top_sensor` and `bottom_sensor` as attributes,
+so you can always see which sensors feed it from the entity's more-info dialog.

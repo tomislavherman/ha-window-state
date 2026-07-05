@@ -1,16 +1,4 @@
 {
-  "entity": {
-    "sensor": {
-      "window_state": {
-        "state": {
-          "closed": "Closed",
-          "tilted": "Tilted",
-          "open": "Open",
-          "unknown": "Unknown"
-        }
-      }
-    }
-  },
   "config": {
     "step": {
       "user": {
@@ -36,11 +24,25 @@
         "description": "Change the contact sensors used to derive the window state.",
         "data": {
           "top_sensor": "Top contact sensor",
-          "bottom_sensor": "Bottom contact sensor"
+          "bottom_sensor": "Bottom contact sensor",
+          "hide_source_sensors": "Hide source sensors"
         },
         "data_description": {
           "top_sensor": "Binary sensor reporting the upper (tilt) contact.",
-          "bottom_sensor": "Binary sensor reporting the lower (open) contact."
+          "bottom_sensor": "Binary sensor reporting the lower (open) contact.",
+          "hide_source_sensors": "Hide the two contact sensors from the Home Assistant UI. This hides them everywhere, not just here."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "window_state": {
+        "state": {
+          "closed": "Closed",
+          "tilted": "Tilted",
+          "open": "Open",
+          "unknown": "Unknown"
         }
       }
     }

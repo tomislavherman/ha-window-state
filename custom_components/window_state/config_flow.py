@@ -14,6 +14,7 @@ from homeassistant.config_entries import (
 )
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
+    BooleanSelector,
     EntitySelector,
     EntitySelectorConfig,
     TextSelector,
@@ -24,6 +25,7 @@ DOMAIN = "window_state"
 CONF_NAME = "name"
 CONF_TOP_SENSOR = "top_sensor"
 CONF_BOTTOM_SENSOR = "bottom_sensor"
+CONF_HIDE_SOURCES = "hide_source_sensors"
 
 _SENSOR_SELECTOR = EntitySelector(EntitySelectorConfig(domain="binary_sensor"))
 
@@ -77,6 +79,10 @@ class WindowStateOptionsFlow(OptionsFlow):
                 vol.Required(
                     CONF_BOTTOM_SENSOR, default=current[CONF_BOTTOM_SENSOR]
                 ): _SENSOR_SELECTOR,
+                vol.Required(
+                    CONF_HIDE_SOURCES,
+                    default=current.get(CONF_HIDE_SOURCES, False),
+                ): BooleanSelector(),
             }
         )
         return self.async_show_form(step_id="init", data_schema=schema)
