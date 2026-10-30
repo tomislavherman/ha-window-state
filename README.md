@@ -67,12 +67,32 @@ Tips:
 
 ## Installation
 
-### Don't have HACS yet?
+Which steps you follow depends on your Home Assistant version (shown under
+**Settings → About**):
 
-HACS (Home Assistant Community Store) is not part of Home Assistant by default —
-you have to add it once. If you don't see **HACS** in your sidebar, install it
-first, then follow the custom-repository steps below. If you'd rather not use
-HACS at all, skip to [Manual](#manual).
+- **2026.11 or newer:** use the [Marketplace](#marketplace-home-assistant-202611-or-newer).
+  HACS is built into Home Assistant as the Marketplace from this version on,
+  and the separate HACS integration can no longer be installed.
+- **2026.3 to 2026.10:** use [HACS](#hacs-home-assistant-20263-to-202610).
+- Either version: you can also install [manually](#manual).
+
+### Marketplace (Home Assistant 2026.11 or newer)
+
+1. Go to **Settings → Marketplace**.
+2. Search for **Window State**, open it, and install it.
+3. **Restart Home Assistant**.
+
+If you used HACS before upgrading to 2026.11, you don't need to do anything:
+the Marketplace takes over Window State and keeps updating it.
+
+### HACS (Home Assistant 2026.3 to 2026.10)
+
+#### Don't have HACS yet?
+
+HACS (Home Assistant Community Store) is not part of Home Assistant before
+2026.11 — you have to add it once. If you don't see **HACS** in your sidebar,
+install it first, then follow the [HACS steps](#install-with-hacs) below. If
+you'd rather not use HACS at all, skip to [Manual](#manual).
 
 1. Open a terminal on your Home Assistant host (e.g. the **Terminal & SSH** or
    **Advanced SSH & Web Terminal** add-on from **Settings → Add-ons → Add-on
@@ -92,13 +112,11 @@ HACS at all, skip to [Manual](#manual).
 For the full, up-to-date procedure see the
 [official HACS install docs](https://hacs.xyz/docs/use/download/download/).
 
-### HACS (custom repository)
+#### Install with HACS
 
 1. In Home Assistant, open **HACS** (from the sidebar).
-2. Click the **⋮** menu (top right) → **Custom repositories**.
-3. Add `https://github.com/tomislavherman/ha-window-state` with category
-   **Integration**.
-4. Search for **Window State**, install it, and **restart Home Assistant**.
+2. Search for **Window State**, open it, and click **Download**.
+3. **Restart Home Assistant**.
 
 ### Manual
 
