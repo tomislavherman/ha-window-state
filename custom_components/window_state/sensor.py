@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+from datetime import datetime
+
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import STATE_OFF, STATE_ON, STATE_UNAVAILABLE, STATE_UNKNOWN
-from homeassistant.core import Event, HomeAssistant, callback
+from homeassistant.core import CALLBACK_TYPE, Event, HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.event import (
     EventStateChangedData,
+    async_call_later,
     async_track_state_change_event,
 )
 from homeassistant.helpers.restore_state import RestoreEntity
@@ -19,6 +22,9 @@ DOMAIN = "window_state"
 CONF_NAME = "name"
 CONF_TOP_SENSOR = "top_sensor"
 CONF_BOTTOM_SENSOR = "bottom_sensor"
+CONF_DEBOUNCE = "debounce_ms"
+
+DEFAULT_DEBOUNCE_MS = 500
 
 STATE_CLOSED = "closed"
 STATE_TILTED = "tilted"
@@ -59,6 +65,8 @@ class WindowStateSensor(SensorEntity, RestoreEntity):
         """Initialize the sensor."""
         self._top_entity_id = config[CONF_TOP_SENSOR]
         self._bottom_entity_id = config[CONF_BOTTOM_SENSOR]
+        self._debounce = config.get(CONF_DEBOUNCE, DEFAULT_DEBOUNCE_MS) / 1000
+        self._cancel_debounce: CALLBACK_TYPE | None = None
         self._attr_unique_id = entry.entry_id
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
@@ -82,13 +90,36 @@ class WindowStateSensor(SensorEntity, RestoreEntity):
                 self._handle_source_change,
             )
         )
+        self.async_on_remove(self._cancel_pending_recalculate)
         # Evaluate once now so we reflect current reality on startup.
         self._recalculate()
 
     @callback
     def _handle_source_change(self, event: Event[EventStateChangedData]) -> None:
-        """React to a state change of either source sensor."""
+        """React to a state change of either source sensor.
+
+        Opening or closing the window moves both contacts within a moment of
+        each other, in no fixed order. Waiting until neither source has changed
+        for the debounce period means only the final state is written, not a
+        brief "tilted" or "unknown" in between.
+        """
+        self._cancel_pending_recalculate()
+        self._cancel_debounce = async_call_later(
+            self.hass, self._debounce, self._debounced_recalculate
+        )
+
+    @callback
+    def _debounced_recalculate(self, _now: datetime) -> None:
+        """Recalculate once the sources have stopped changing."""
+        self._cancel_debounce = None
         self._recalculate()
+
+    @callback
+    def _cancel_pending_recalculate(self) -> None:
+        """Cancel a scheduled recalculation, if there is one."""
+        if self._cancel_debounce is not None:
+            self._cancel_debounce()
+            self._cancel_debounce = None
 
     @callback
     def _recalculate(self) -> None:

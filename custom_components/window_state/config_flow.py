@@ -17,6 +17,9 @@ from homeassistant.helpers.selector import (
     BooleanSelector,
     EntitySelector,
     EntitySelectorConfig,
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
     TextSelector,
 )
 
@@ -26,6 +29,9 @@ CONF_NAME = "name"
 CONF_TOP_SENSOR = "top_sensor"
 CONF_BOTTOM_SENSOR = "bottom_sensor"
 CONF_HIDE_SOURCES = "hide_source_sensors"
+CONF_DEBOUNCE = "debounce_ms"
+
+DEFAULT_DEBOUNCE_MS = 500
 
 _SENSOR_SELECTOR = EntitySelector(EntitySelectorConfig(domain="binary_sensor"))
 
@@ -83,6 +89,18 @@ class WindowStateOptionsFlow(OptionsFlow):
                     CONF_HIDE_SOURCES,
                     default=current.get(CONF_HIDE_SOURCES, False),
                 ): BooleanSelector(),
+                vol.Required(
+                    CONF_DEBOUNCE,
+                    default=current.get(CONF_DEBOUNCE, DEFAULT_DEBOUNCE_MS),
+                ): NumberSelector(
+                    NumberSelectorConfig(
+                        min=0,
+                        max=2000,
+                        step=100,
+                        unit_of_measurement="ms",
+                        mode=NumberSelectorMode.BOX,
+                    )
+                ),
             }
         )
         return self.async_show_form(step_id="init", data_schema=schema)
