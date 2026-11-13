@@ -1,0 +1,52 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Fenster hinzufügen",
+        "description": "Erstelle ein Fenster aus seinen beiden Kontaktsensoren.",
+        "data": {
+          "name": "Name",
+          "top_sensor": "Oberer Kontaktsensor",
+          "bottom_sensor": "Unterer Kontaktsensor"
+        },
+        "data_description": {
+          "name": "Freundlicher Name für dieses Fenster (wird für das Gerät und die Entität verwendet).",
+          "top_sensor": "Binärsensor, der den oberen (Kipp-)Kontakt meldet.",
+          "bottom_sensor": "Binärsensor, der den unteren (Offen-)Kontakt meldet."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Fenstersensoren bearbeiten",
+        "description": "Ändere die Kontaktsensoren, die für den Fensterstatus verwendet werden.",
+        "data": {
+          "top_sensor": "Oberer Kontaktsensor",
+          "bottom_sensor": "Unterer Kontaktsensor",
+          "hide_source_sensors": "Quellsensoren ausblenden",
+          "debounce_ms": "Verzögerungszeit"
+        },
+        "data_description": {
+          "top_sensor": "Binärsensor, der den oberen (Kipp-)Kontakt meldet.",
+          "bottom_sensor": "Binärsensor, der den unteren (Offen-)Kontakt meldet.",
+          "hide_source_sensors": "Blende die beiden Kontaktsensoren in der Home-Assistant-Benutzeroberfläche aus. Dadurch werden sie überall ausgeblendet, nicht nur hier.",
+          "debounce_ms": "Wie lange, in Millisekunden, beide Kontaktsensoren unverändert bleiben müssen, bevor der Fensterstatus aktualisiert wird. Dadurch wird ein kurzes Kipp- oder Unbekannt-Status beim Öffnen oder Schließen des Fensters verhindert. Setze den Wert auf 0, um sofort zu aktualisieren."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "window_state": {
+        "state": {
+          "closed": "Geschlossen",
+          "tilted": "Gekippt",
+          "open": "Offen",
+          "unknown": "Unbekannt"
+        }
+      }
+    }
+  }
+}
