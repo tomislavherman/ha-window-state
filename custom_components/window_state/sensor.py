@@ -24,7 +24,7 @@ CONF_TOP_SENSOR = "top_sensor"
 CONF_BOTTOM_SENSOR = "bottom_sensor"
 CONF_DEBOUNCE = "debounce_ms"
 
-DEFAULT_DEBOUNCE_MS = 500
+DEFAULT_DEBOUNCE_MS = 250
 
 STATE_CLOSED = "closed"
 STATE_TILTED = "tilted"

@@ -31,7 +31,7 @@ CONF_BOTTOM_SENSOR = "bottom_sensor"
 CONF_HIDE_SOURCES = "hide_source_sensors"
 CONF_DEBOUNCE = "debounce_ms"
 
-DEFAULT_DEBOUNCE_MS = 500
+DEFAULT_DEBOUNCE_MS = 250
 
 _SENSOR_SELECTOR = EntitySelector(EntitySelectorConfig(domain="binary_sensor"))
 
@@ -96,7 +96,7 @@ class WindowStateOptionsFlow(OptionsFlow):
                     NumberSelectorConfig(
                         min=0,
                         max=2000,
-                        step=100,
+                        step=50,
                         unit_of_measurement="ms",
                         mode=NumberSelectorMode.BOX,
                     )

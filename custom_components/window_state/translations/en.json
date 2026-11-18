@@ -32,7 +32,7 @@
           "top_sensor": "Binary sensor reporting the upper (tilt) contact.",
           "bottom_sensor": "Binary sensor reporting the lower (open) contact.",
           "hide_source_sensors": "Hide the two contact sensors from the Home Assistant UI. This hides them everywhere, not just here.",
-          "debounce_ms": "How long, in milliseconds, both contact sensors must stay unchanged before the window state is updated. This prevents a brief Tilted or Unknown state while the window opens or closes. Set to 0 to update immediately."
+          "debounce_ms": "How long (0–2000 ms) both contact sensors must stay unchanged before the window state is updated. This prevents a brief Tilted or Unknown state while the window opens or closes. Set to 0 to update immediately."
         }
       }
     }

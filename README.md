@@ -149,7 +149,7 @@ choose **Configure** to:
   core Group helper's "Hide members": it hides them **everywhere**, not just
   under this window, and is reversed if you turn the option off or delete the
   window. Sensors you hid yourself are left untouched.
-- **Debounce time** (0 to 2000 ms, default 500 ms) — when the window opens or closes, the
+- **Debounce time** (0 to 2000 ms, default 250 ms) — when the window opens or closes, the
   two contacts change a moment apart and in no fixed order, which would briefly
   show `tilted` or `unknown`. The window state is only updated once both
   contacts have stayed unchanged for this long. Set it to `0` to update
