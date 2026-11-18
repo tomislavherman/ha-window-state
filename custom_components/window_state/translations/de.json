@@ -10,7 +10,7 @@
           "bottom_sensor": "Unterer Kontaktsensor"
         },
         "data_description": {
-          "name": "Freundlicher Name für dieses Fenster (wird für das Gerät und die Entität verwendet).",
+          "name": "Anzeigename für dieses Fenster (wird für das Gerät und die Entität verwendet).",
           "top_sensor": "Binärsensor, der den oberen (Kipp-)Kontakt meldet.",
           "bottom_sensor": "Binärsensor, der den unteren (Offen-)Kontakt meldet."
         }
@@ -32,7 +32,7 @@
           "top_sensor": "Binärsensor, der den oberen (Kipp-)Kontakt meldet.",
           "bottom_sensor": "Binärsensor, der den unteren (Offen-)Kontakt meldet.",
           "hide_source_sensors": "Blende die beiden Kontaktsensoren in der Home-Assistant-Benutzeroberfläche aus. Dadurch werden sie überall ausgeblendet, nicht nur hier.",
-          "debounce_ms": "Wie lange (0–2000 ms) beide Kontaktsensoren unverändert bleiben müssen, bevor der Fensterstatus aktualisiert wird. Dadurch wird ein kurzes Kipp- oder Unbekannt-Status beim Öffnen oder Schließen des Fensters verhindert. Setze den Wert auf 0, um sofort zu aktualisieren."
+          "debounce_ms": "Wie lange (0–2000 ms) beide Kontaktsensoren unverändert bleiben müssen, bevor der Fensterstatus aktualisiert wird. Dadurch wird verhindert, dass beim Öffnen oder Schließen des Fensters kurzzeitig „Gekippt“ oder „Unbekannt“ angezeigt wird. Setze den Wert auf 0, um sofort zu aktualisieren."
         }
       }
     }
