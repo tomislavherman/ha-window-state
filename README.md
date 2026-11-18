@@ -34,15 +34,20 @@ window opens, so the sensors there wouldn't detect anything. Position each
 sensor so its two halves line up when the window is fully closed.
 
 ```
-   hinges                    handle side (moving edge)
-     │                                 │
-     ▼                                 ▼
-   ┌─────────────────────────────────[ TOP sensor ]┐
-   │                                               │
-   │                  window                       │
-   │                                               │
-   └──────────────────────────────[ BOTTOM sensor ]┘
+Hinges       Handle side
+  ↓              ↓
+  ┌──────────────[T]┐
+  │                 │
+  │                 │
+  │                 │
+  │     Window      │
+  │                 │
+  │                 │
+  │                 │
+  └──────────────[B]┘
 ```
+
+**T** = top sensor, **B** = bottom sensor, both on the moving handle side.
 
 Why top + bottom on the moving edge tells the three states apart:
 
